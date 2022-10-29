@@ -1,0 +1,83 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+    background-color: rgb(67, 150, 156);
+}
+
+/* .App:only-child {
+    margin: 3% 7%;
+} */
+
+/* --------------------- TEXT --------------------- */
+
+a{
+    text-decoration: none;
+}
+
+h4{
+    color: black;
+    font-size: 3rem;
+}
+
+h6{
+    font-size: 1rem;
+}
+
+/* ---------------------------- IMAGES ---------------------------- */
+
+img{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;    /* to fit and fill the parent box with the image without distorting/ maintains the image aspect ratio */
+}
+
+/* --------------------- NAVBAR --------------------- */
+
+nav{
+    /* display: inline-block; */
+    float: right;
+}
+
+nav a{
+    margin-left: 7%;
+    font-size: 1.4rem;
+}
+
+/* --------------------- HEADER --------------------- */
+
+header{
+    background-color: rgb(67, 150, 156);
+    width: 100%;
+}
+
+header h4{
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+/* --------------------- FOOTER --------------------- */
+
+footer{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.Greeting{
+    background-image: url('https://www.worldatlas.com/r/w2560-q80/upload/ea/3f/a4/shutterstock-497360188.jpg');
+}
+    
+.WhiteBox {
+    text-align: center;
+    border: 5px solid white;
+    padding: 0;
+    margin: 0;
+    height: 600px;
+    width: 600px;
+}
+
