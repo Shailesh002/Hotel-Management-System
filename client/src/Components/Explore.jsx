@@ -8,9 +8,23 @@ function Explore(){
             <h2>Explore...</h2>
 
             <Container>
-                <Col></Col>
-                <Col></Col>
-                <Col></Col>
+                <Row>
+                    <Col className='ExploreCards'>
+                        <img src='Images/img21.jpg' alt='Room'/>
+                        <h3>Well Equipped Rooms</h3>
+                        <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.</h5>
+                    </Col>
+                    <Col className='ExploreCards'>
+                        <img src='Images/image22.jpg' alt='Cusine'/>
+                        <h3>Well Equipped Rooms</h3>
+                        <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.</h5>
+                    </Col>
+                    <Col className='ExploreCards'>
+                        <img src='Images/image23.jpg' alt='Pool'/>
+                        <h3>Well Equipped Rooms</h3>
+                        <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.</h5>
+                    </Col>
+                </Row>
             </Container>
         </div>
     );

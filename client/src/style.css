@@ -30,8 +30,9 @@ h2{
 }
 
 h4{
-    color: black;
+    color: white;
     font-size: 3rem;
+    font-family: 'Allura', cursive;
 }
 
 h6{
@@ -140,6 +141,18 @@ footer{
     z-index: 0;
 
     filter: brightness(-1), contrast(-2), saturate(3);
+}
+
+/* --------------------- EXPLORE --------------------- */
+
+.ExploreCards img{
+    height: 300px;
+    width: 400px;
+    margin-bottom: 30px;
+}
+
+.ExploreCards h3{
+    
 }
 
 /* ---------------------------- ALLIGNMENTS ---------------------------- */
