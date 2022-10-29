@@ -1,19 +1,32 @@
 body{
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
-    color: white;
-    background-color: rgb(67, 150, 156);
-}
+    box-sizing: border-box; 
+    background-color: rgb(67, 150, 156) !important;
+    color: white !important;
 
-/* .App:only-child {
-    margin: 3% 7%;
-} */
+    font-family: 'Times New Roman', Times, serif;
+} 
 
 /* --------------------- TEXT --------------------- */
 
 a{
     text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: wheat;
+}
+
+h1{
+    font-size: 6rem;
+    font-family: 'Cardo', serif;
+}
+
+h2{
+    font-size: 5rem;
+    font-weight: 400;
 }
 
 h4{
@@ -42,7 +55,7 @@ nav{
 }
 
 nav a{
-    margin-left: 7%;
+    margin-right: 7% !important;
     font-size: 1.4rem;
 }
 
@@ -51,33 +64,93 @@ nav a{
 header{
     background-color: rgb(67, 150, 156);
     width: 100%;
+    height: 80px;
+    padding: 1% 7%;
 }
 
 header h4{
     float: left;
-    margin: 0;
-    padding: 0;
 }
 
 /* --------------------- FOOTER --------------------- */
 
 footer{
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
     text-align: center;
     width: 100%;
+    padding: 3px 2px 0;
+    font-size: 1rem;
+    font-family: 'Times New Roman', Times, serif;
 }
 
+/* --------------------- GREETING --------------------- */
+
 .Greeting{
-    background-image: url('https://www.worldatlas.com/r/w2560-q80/upload/ea/3f/a4/shutterstock-497360188.jpg');
+    background-image: url('/Applications/Sandali/CollegeProjects/HotelManagementSystem/client/public/Images/mainbackground.jpg');
+    height: 100vh;
 }
-    
-.WhiteBox {
-    text-align: center;
-    border: 5px solid white;
+
+.Row{
     padding: 0;
     margin: 0;
-    height: 600px;
-    width: 600px;
+    height: 250px;
+}
+
+.Col{
+    padding: 0;
+    height: 100%;
+}  
+
+.WhiteBox {
+    text-align: center;
+    border: 15px solid white;
+    padding: 0;
+    margin: 0;
+    /* height: 500px; */
+    width: 700px;
+
+    background-color: rgb(94, 174, 188);
+
+    position: absolute;
+    top: 10%;
+    left: 10%;
+
+    z-index: 1;
+}
+
+.WhiteBox h1{
+    margin: 0;
+    padding: 0;
+}
+
+.WhiteBox img{
+    /* border: 3px solid red; */
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important; 
+}
+
+.CircleImg{
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    left: 30%;
+    z-index: 0;
+
+    filter: brightness(-1), contrast(-2), saturate(3);
+}
+
+/* ---------------------------- ALLIGNMENTS ---------------------------- */
+
+.Center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Relative{
+    position: relative;
 }
 

@@ -5,7 +5,7 @@ import './style.css';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';  
+// import Navbar from './Components/Navbar';  
 
 import Home from "./Pages/Home"
 import Login from './Pages/Login';
@@ -16,7 +16,7 @@ function App(props) {
         <div className='App'>
         <Header />
             <Router>
-                <Navbar />
+                {/* <Navbar /> */}
                 <Routes>
                     <Route exact path='/' element={<Home isAdmin={props.isAdmin}/>} />
                     <Route path='/login' element={<Login isAdmin={props.isAdmin}/>} />

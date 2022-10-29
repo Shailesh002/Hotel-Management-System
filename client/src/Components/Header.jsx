@@ -1,10 +1,10 @@
-// import Navbar from "./Navbar";
+import Navbar from "./Navbar";
 
 function Header(){
     return(
         <header>
-            <h4>World Full of Amaze</h4>
-            {/* <Navbar/> */}
+            <h4 className="Center">World Full of Amaze</h4>
+            <Navbar/>
         </header>
     );
 }
