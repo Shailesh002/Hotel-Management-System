@@ -2,12 +2,14 @@ import NavSingle from "./NavSingle";
 
 function Navbar(props){
     return(
-        <nav>
-            <NavSingle URL="" Title="Home"/>
-            <NavSingle URL="" Title="Contact"/>
-            <NavSingle URL="" Title="About"/>
-            <NavSingle URL="" Title="Login"/>
-        </nav>
+        <div className="">
+            <nav>
+                <NavSingle URL="/" Title="Home"/>
+                <NavSingle URL="/contact" Title="Contact"/>
+                <NavSingle URL="/about" Title="About"/>
+                <NavSingle URL="/login" Title="Login"/>
+            </nav>
+        </div>
     );
 }
 

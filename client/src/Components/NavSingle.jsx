@@ -1,6 +1,8 @@
 function NavSingle(props){
     return(
-        <a href={props.URL}>{props.Title}</a>
+        <div className="NavSingle">
+            <a href={props.URL}>{props.Title}</a>
+        </div>
     );
 }
 
