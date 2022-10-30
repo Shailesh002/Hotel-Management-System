@@ -7,7 +7,7 @@ function Explore(){
         <div style={{backgroundColor:'white', color:'black', padding:'3%'}}>
             <h2>Explore...</h2>
 
-            <Container>
+            <Container className='ExploreBox'>
                 <Row>
                     <Col className='ExploreCards'>
                         <img src='Images/img21.jpg' alt='Room'/>

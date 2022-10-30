@@ -151,6 +151,11 @@ footer{
 
 /* --------------------- EXPLORE --------------------- */
 
+.ExploreBox{
+    padding: 0;
+    width: 100%;
+}
+
 .ExploreCards img{
     height: 300px;
     width: 400px;
