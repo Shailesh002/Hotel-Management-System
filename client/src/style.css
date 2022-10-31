@@ -96,7 +96,7 @@ footer{
 /* --------------------- GREETING --------------------- */
 
 .Greeting{
-    background-image: url('C:\Users\acer\Desktop\hms\Hotel-Management-System\client\public\Images\mainbackground.jpg');
+    background-image: url("../public/Images/mainbackground.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;

@@ -6,8 +6,10 @@
 - DATABASE - MongoDB <br />
 
 ## HOME PAGE
-<img width="100%" alt="Login" src="./client/public/Images/SS1.png"/> 
-<img width="100%" alt="Login" src="./client/public/Images/SS2.png"/> 
+<img width="100%" alt="Login" src="./client/public/SS/SS1.png"/> 
+<img width="100%" alt="Login" src="./client/public/SS/SS2.png"/> 
+<img width="100%" alt="Login" src="./client/public/SS/SS3.png"/> 
+
 
 ## LOGIN PAGE
-## About Us
+## ABOUT US
