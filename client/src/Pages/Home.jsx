@@ -1,4 +1,5 @@
 import Explore from "../Components/Explore";
+import ComeTogether from "../Components/ComeTogether";
 import Greeting from "../Components/Greeting";
 
 function Home(){
@@ -6,6 +7,7 @@ function Home(){
         <div className=''>
             <Greeting/>
             <Explore/>
+            <ComeTogether/>
         </div>
     );
 }

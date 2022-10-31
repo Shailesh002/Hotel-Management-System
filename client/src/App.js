@@ -5,13 +5,12 @@ import './style.css';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';  
+import Navbar from './Components/Navbar'; 
 
 import Home from "./Pages/Home";
 import Contact from './Pages/Contact';
 import About from './Pages/About';
 import Login from './Pages/Login';
-
   
 function App(props) {
     return (
