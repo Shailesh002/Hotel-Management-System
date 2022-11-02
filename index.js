@@ -37,7 +37,8 @@ app.post('/login', (req, res) =>  {
     .then( (result) => {
       console.log(result);
       if(result == false) {
-        res.send("TRY AGAIN LATER")
+        // res.send("TRY AGAIN LATER")
+        res.redirect("/login");
       }else{
         isLoggedIn = true;
 
@@ -46,7 +47,8 @@ app.post('/login', (req, res) =>  {
 
         LoggedInUsername = username;
         
-        res.send("LOGGED IN isAdmin = "+isAdmin)
+        // res.send("LOGGED IN isAdmin = "+isAdmin)
+        res.redirect('/');
       }    
   })
   // res.send(`Username: ${username} Email: ${email} Password: ${password}`);

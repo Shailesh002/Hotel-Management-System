@@ -1,16 +1,16 @@
-import React, { useState, useEffect} from "react";
+import React from "react";
 
 import LoginForm from "../Components/LoginForm"
 
 function Login(){
     return(
-        <div className=''>
+        <div className='TextCenter'>
             <h1>Login</h1>
             <div className="">
                 <div className="Center">
-                <div className="FitInSizedBox Center neonBox FormBox">
-                <LoginForm />
-                </div>
+                    <div className="FitInSizedBox Center neonBox FormBox">
+                        <LoginForm />
+                    </div>
                 </div>
             </div>
         </div>

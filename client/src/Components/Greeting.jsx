@@ -18,7 +18,7 @@ function Greeting(){
                     </Col>
                 </Row>
             </Container>
-            <img className='CircleImg' src='Images/circle2.png'/>
+            <img alt='circle' className='CircleImg' src='Images/circle2.png'/>
         </div>
     );
 }

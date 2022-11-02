@@ -5,12 +5,13 @@ import './style.css';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
-import Navbar from './Components/Navbar'; 
+// import Navbar from './Components/Navbar'; 
 
 import Home from "./Pages/Home";
-import Contact from './Pages/Contact';
+// import Contact from './Pages/Contact';
 import About from './Pages/About';
 import Login from './Pages/Login';
+import Rooms from './Pages/Rooms';
   
 function App(props) {
 
@@ -23,6 +24,7 @@ function App(props) {
     function getToken() {
         let url = 'http://localhost:3001/login'; //URL of the resource we want to fetch
         fetch(url).then((response) => response.json()).then((receivedData) => setToken(receivedData));    
+        console.log(token);
     }
 
     useEffect( () => getToken(), [] );
@@ -34,8 +36,9 @@ function App(props) {
                 {/* <Navbar /> */}
                 <Routes>
                     <Route exact path='/' element={<Home isAdmin={props.isAdmin}/>} />
+                    <Route path='/rooms' element={<Rooms />} />
                     <Route path='/about' element={<About/>} />
-                    <Route path='/contact' element={<Contact/>} />
+                    {/* <Route path='/contact' element={<Contact/>} /> */}
                     
                     {
                         token.isLoggedIn === true?

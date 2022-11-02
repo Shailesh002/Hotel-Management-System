@@ -12,4 +12,8 @@
 
 
 ## LOGIN PAGE
-## ABOUT US
+<img width="100%" alt="Login" src="./client/public/SS/SS6.png"/> 
+
+## AVAILABILE SUITS PAGE
+<img width="100%" alt="Login" src="./client/public/SS/SS4.png"/> 
+<img width="100%" alt="Login" src="./client/public/SS/SS5.png"/> 

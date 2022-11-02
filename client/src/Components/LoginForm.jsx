@@ -1,8 +1,9 @@
 import { Form, Button } from "react-bootstrap";
-import React, {useState,useEffect} from 'react';
+// import React, {useState,useEffect} from 'react';
 
 function LoginForm (props) {
   return (
+    <div className="FormContainer">
         <Form action="/login" method="post" className="">
 
         <Form.Group className="mb-3" controlId="formBasicName">
@@ -30,6 +31,7 @@ function LoginForm (props) {
         <Button className="ButtonStyle" variant="primary" type="submit">Submit</Button>
 
       </Form>
+    </div>
     );
 }
 
