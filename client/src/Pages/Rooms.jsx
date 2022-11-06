@@ -17,32 +17,32 @@ function Rooms(){
             <h1 className="Center">Available Suits</h1>
 
             <div className="RoomsInputContainer">
-            <Container className="" >
-                <Row className="SingleCardBox RoomsInputBox">
-                    <Col>
-                        <label for="checkIn">Check-in</label>
-                        <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
-                    </Col>
-                    <Col>
-                        <label for="checkOut">Check-out</label>
-                        <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
-                    </Col>
-                    <Col>
-                        <label for="Occupancy">Occupancy</label>
-                        <DatalistInput
-                            placeholder="1 room  2 adults"
-                            // label="Select ice cream flavor"
-                            onSelect={(item) => console.log(item.value)}
-                            items={[
-                            { id: 'SingleRoom', value: '1 room  1 adult' },
-                            { id: 'DoubleRoom', value: '1 room  2 adults' },
-                            { id: 'TwinRoom', value: '1 room  2 adults' },
-                            { id: 'KingRoom', value: '1 room  2 adults' },
-                            ]}
-                        />
-                    </Col>
-                </Row>
-            </Container>
+                <Container className="" >
+                    <Row className="SingleCardBox RoomsInputBox">
+                        <Col>
+                            <label>Check-in</label>
+                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                        </Col>
+                        <Col>
+                            <label>Check-out</label>
+                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                        </Col>
+                        <Col>
+                            <label>Occupancy</label>
+                            <DatalistInput
+                                placeholder="1 room  2 adults"
+                                // label="Select ice cream flavor"
+                                onSelect={(item) => console.log(item.value)}
+                                items={[
+                                    { id: 'SingleRoom', value: '1 room  1 adult' },
+                                    { id: 'DoubleRoom', value: '1 room  2 adults' },
+                                    { id: 'TwinRoom', value: '1 room  2 adults' },
+                                    { id: 'KingRoom', value: '1 room  2 adults' },
+                                ]}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
             </div>
 
             <div className="RoomsContainer">

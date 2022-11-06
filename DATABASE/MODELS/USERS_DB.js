@@ -1,21 +1,25 @@
 const { json } = require('body-parser');
+const e = require('express');
 var mongoose = require('mongoose');
 
-
-const UserLoginModel = mongoose.model("UserLoginModel", new mongoose.Schema({ Username: String, Email: String, Password:String}));
+const UserModel = mongoose.model("Users", new mongoose.Schema({ Username: String, PhoneNo: String, Email: String, Password:String}));
 
 //---------------------------------------- U S E R-----------------------------------------------
 
 module.exports.getUsersList = async () => {
-    return await UserLoginModel.find({}, (err, data) => json.toString(data)).clone().catch(function(err){ console.log(err)});
+    return await UserModel.find({}, (err, data) => json.toString(data)).clone().catch(function(err){ console.log(err)});
 }
 
 module.exports.addUser = async (newUser) => {
-    await (new UserLoginModel(newUser)).save();
+    await (new UserModel(newUser)).save();
 }
 
 module.exports.UsernameExsits = async (entryUser) => {
-    const result = await UserLoginModel.findOne({Username: entryUser.Username});
+    const result = await UserModel.findOne({Username: entryUser.Username});
+    
+    console.log("\n\n--> UsernameExists()")
+    console.log(result+"\n\n\n\n")
+
     if(result === true ) {
         return true;
     }
@@ -23,7 +27,11 @@ module.exports.UsernameExsits = async (entryUser) => {
 }
 
 module.exports.EmailExsits = async (entryUser) => {
-    const result = await UserLoginModel.findOne({Email: entryUser.Email});
+    const result = await UserModel.findOne({Email: entryUser.Email});
+    
+    console.log("\n\n--> EmailExists()")
+    console.log(result+"\n\n\n\n")
+    
     if(result === true) {
         return true;
     }
@@ -31,38 +39,60 @@ module.exports.EmailExsits = async (entryUser) => {
 }
 
 module.exports.UserExsits = async (entryUser) => {
-    let result;
+    let ObjectFromDB;
+
+    console.log('\nENTRY USER = ');
+    console.log(entryUser)
+
     if(entryUser){
-        result = await UserLoginModel.findOne({Username: entryUser.Username, Email: entryUser.Email, Password:entryUser.Password});
+        ObjectFromDB = await UserModel.find({Username: entryUser.Username});
     }
 
     console.log("\n--> UserExists()");
-    console.log("\nchecking in the db whether these credentials match up with anyone");
-    console.log(result);
+    console.log(ObjectFromDB);
     console.log("\n--> ~ UserExists()");
 
-    if(result===null) {
+    if(ObjectFromDB===null) {
         return false;
     }
-    return true;
+
+    // console.log('\nfrom DB --> '+ObjectFromDB[0].Password)
+    // console.log('\nfrom DB --> '+ObjectFromDB[0].Username)
+    // console.log('\nfrom user --> '+entryUser.Password)
+    // console.log('\nequality --> '+ObjectFromDB[0].Password === entryUser.Password)
+
+    if(ObjectFromDB[0].Password === entryUser.Password) {
+        console.log('----- password matches = ')
+        
+        return true;
+    }
+
+    console.log('----- password NOT matches')
+
+    return false;
 }
 
 module.exports.loginUser = async(entryUser) => {
     return await this.UserExsits(entryUser);
 }
 
-module.exports.singupUser = (entryUser) => {
-    if(this.UsernameExsits(entryUser) || this.EmailExsits(entryUser)) {
-        return false;
-    }
-    addUser(entryUser);
-    return true;
-}
+module.exports.singupUser = async(entryUser) => {
+    let result1 = await this.UsernameExsits(entryUser);
+    let result2 = await this.EmailExsits(entryUser);
 
-module.exports.LoggedInAsDietitian = (entryUser) => {
-    if( entryUser.Username === "dietitianRashu") {
+    console.log('\n\nRESULT1 = ');
+    console.log(result1);
+    console.log('\n\nRESULT2 = ');
+    console.log(result2);
+
+    if( result1 === false || result2 === false) {
+        let result3 = await this.addUser(entryUser);
+
+        console.log('\n\nRESULT3 = ');
+        console.log(result3);
+
         return true;
-    } else {
-        return false;
     }
+    
+    return false;
 }

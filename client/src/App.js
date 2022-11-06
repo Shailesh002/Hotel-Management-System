@@ -12,22 +12,22 @@ import Home from "./Pages/Home";
 import About from './Pages/About';
 import Login from './Pages/Login';
 import Rooms from './Pages/Rooms';
+import SignUp from './Pages/SignUp';
   
 function App(props) {
 
-    const [token, setToken] = useState({
-        isLoggedIn: false,
-        isAdmin: false,
-        Username: ""
-    });
+    const [TOKEN, setToken] = useState([]);
 
-    function getToken() {
-        let url = 'http://localhost:3001/login'; //URL of the resource we want to fetch
-        fetch(url).then((response) => response.json()).then((receivedData) => setToken(receivedData));    
-        console.log(token);
-    }
+    useEffect(() => {
+        const receiveData = localStorage.getItem('TOKEN');
+        
+        console.log('TOKEN = ')
+        console.log(receiveData)
 
-    useEffect( () => getToken(), [] );
+        if (receiveData) {
+            setToken(receiveData);
+        }
+    }, []);
 
     return (
         <div className='App'>
@@ -35,17 +35,11 @@ function App(props) {
             <Router>
                 {/* <Navbar /> */}
                 <Routes>
-                    <Route exact path='/' element={<Home isAdmin={props.isAdmin}/>} />
+                    <Route exact path='/' element={<Home TOKEN={TOKEN} />} />
                     <Route path='/rooms' element={<Rooms />} />
                     <Route path='/about' element={<About/>} />
-                    {/* <Route path='/contact' element={<Contact/>} /> */}
-                    
-                    {
-                        token.isLoggedIn === true?
-                        <Route path='/logout'/>
-                        : <Route path='/login' element={<Login token={token} isAdmin={token.isAdmin} />} />
-                    }
-                
+                    <Route path='/login' element={<Login TOKEN={TOKEN} />} />
+                    <Route path='/signup' element={<SignUp TOKEN={TOKEN} />} />
                 </Routes>
             </Router>
         <Footer/>
