@@ -1,45 +1,94 @@
 import { FaBeer } from 'react-icons/fa';
 // import {GiCoffeePot} from 'react-icons/GiCoffeePot'
 import { TbBath } from "react-icons/tb";
+import { AiOutlineDesktop, AiOutlineWifi, AiFillBell, AiFillCar, AiOutlineCoffee} from "react-icons/ai";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import React, {useState,useEffect} from 'react';
+
 function Room(props) {
+
+    const [TOKEN, setToken] = useState([]);
+
+    function getToken() {
+        setToken(JSON.parse(localStorage.getItem('TOKEN')));
+    }
+
+    useEffect( () => getToken()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    , [] );
 
     var list = props.UTILITIES;
 
     function callSwitch(item){
-        switch(item){
-            case 1: {
-                return <FaBeer />
-            }break;
+        let ANS = null;
+        switch(item) {
+            case 1: 
+                ANS =  (<div key='AiOutlineDesktop1' className='ICON'>
+                        <AiOutlineDesktop  />
+                    </div>
+                );
+            break;
 
-            // case 2:{
-            //     return <GiCoffeePot />
-            // }
+            case 2: 
+                ANS =  (<div key='AiOutlineWifi2' className='ICON'>
+                        <AiOutlineWifi  />
+                    </div>
+                );
+            break;
 
-            case 2:{
-                return <TbBath />
-            }
+            case 3: 
+                ANS =  (<div key='AiFillBell3' className='ICON'>
+                            <AiFillBell />
+                    </div>
+                );
+            break;
 
-            default: {
-                return <FaBeer />
-            }
+            case 4: 
+                ANS =  (<div key='AiFillCar4' className='ICON'>
+                            <AiFillCar />
+                    </div>
+                );
+            break;
+
+            case 5: 
+                ANS =  (<div key='AiOutlineCoffee5' className='ICON'>
+                        <AiOutlineCoffee />
+                    </div>
+                );
+            break;
+
+            case 6:
+                ANS =  (<div key='TbBath6' className='ICON'>
+                            <TbBath />
+                        </div>
+                );
+            break;
+
+            default: 
+                ANS =  (<div key='FaBeer7' className='ICON'>
+                            <FaBeer />
+                        </div>
+                );
+            
         }
+        return ANS;
     }
 
     return (
         <div className="SingleCardBox">
             <Container className=''>
                 <Row className='SingleCard'>
-                    <Col className=''>
-                        <img alt='Room' src={props.IMG}/>
+                    <Col className='' style={{padding:'0',margin:'0'}}>
+                        <img className='RoomImage' alt='Room' src={props.IMG}/>
                     </Col>
                     <Col className='RoomText'>
                         <Row>
-                            <h3>{props.TITLE}</h3>
+                        
+                            <h3><br/> <br/>{props.TITLE}</h3>
                             <h6>{props.VOL}</h6><h6>{props.CAPACITY}</h6>
                         </Row>
 
@@ -56,7 +105,13 @@ function Room(props) {
                         </Row>
 
                         <Row>
-                            <button>BOOK</button>
+                        {
+                            TOKEN === null?
+                            <a href='/login'><button className='BookBTN'>BOOK</button></a>
+                            : 
+                            <a href='/bookingform'><button className='BookBTN'>BOOK</button></a>
+                        }
+                            
                         </Row>
                     </Col>
                 </Row>

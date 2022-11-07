@@ -8,10 +8,6 @@ var cors = require('cors');
 
 var app = module.exports = express();
 
-var isLoggedIn = false;
-var isAdmin = false;
-var LoggedInUsername = "";
-
 //----------------------- ----------------------- -----------------------
 app.use(cors());
 app.engine('.html', require('ejs').__express);      //Register ejs as .html. If we did not call this, we would need to name our views foo.ejs instead of foo.html. The __express method is simply a function that engines use to hook into the Express view system by default, so if we want to change "foo.ejs" to "foo.html" we simply pass _any_ function, in this case `ejs.__express`.
@@ -20,6 +16,45 @@ app.use(express.static(path.join(__dirname, 'client', 'src')));  // Path to our 
 app.set('view engine', 'html')  // Without this you would need to supply the extension to res.render() ex: res.render('users.html').
 app.use( bodyParser.urlencoded({ extended : true }) );
 app.use(bodyParser.json());
+
+//-------------------------------- COUNTER -----------------------------------------------
+
+app.get("/counter", (req, res) => DB.COUNTER.getCounterList().then( (result) => res.json(result)) );
+
+app.get("/counter/date", (req, res) => DB.COUNTER.getCounterForTheGivenDate(req.query.DATE).then( (result) => res.json(result)) );
+
+//-------------------------------- SINGLE ROOM -----------------------------------------------
+
+app.get("/singleroom", (req, res) => DB.SINGLEROOM.getSingleRoomList().then( (result) => res.json(result)) );
+
+app.get('/singleroom/deletion', (req, res) => DB.SINGLEROOM.deleteSingleRoomItem( req.query.delID ).then( () => res.redirect('/rooms')) );
+
+app.post("/singleroom", (req, res) => DB.SINGLEROOM.addSingleRoomItem( { RoomNo : req.body.RoomNo } ).then( () => res.redirect('/rooms')) );
+
+//-------------------------------- TWIN ROOM -----------------------------------------------
+
+app.get("/twinroom", (req, res) => DB.TWINROOM.getTwinRoomList().then( (result) => res.json(result)) );
+
+app.get('/twinroom/deletion', (req, res) => DB.TWINROOM.deleteTwinRoomItem( req.query.delID ).then( () => res.redirect('/rooms')) );
+
+app.post("/twinroom", (req, res) => DB.TWINROOM.addTwinRoomItem( { RoomNo : req.body.RoomNo } ).then( () => res.redirect('/rooms')) );
+
+//-------------------------------- DOUBLE ROOM -----------------------------------------------
+
+app.get("/doubleroom", (req, res) => DB.DOUBLEROOM.getDoubleRoomList().then( (result) => res.json(result)) );
+
+app.get('/doubleroom/deletion', (req, res) => DB.DOUBLEROOM.deleteDoubleRoomItem( req.query.delID ).then( () => res.redirect('/rooms')) );
+
+app.post("/doubleroom", (req, res) => DB.DOUBLEROOM.addDoubleRoomItem( { RoomNo : req.body.RoomNo } ).then( () => res.redirect('/rooms')) );
+
+//-------------------------------- KING ROOM -----------------------------------------------
+
+app.get("/kingroom", (req, res) => DB.KINGROOM.getKingRoomList().then( (result) => res.json(result)) );
+
+app.get('/kingroom/deletion', (req, res) => DB.KINGROOM.deleteKingRoomItem( req.query.delID ).then( () => res.redirect('/rooms')) );
+
+app.post("/kingroom", (req, res) => DB.KINGROOM.addKingRoomItem( { RoomNo : req.body.RoomNo } ).then( () => res.redirect('/rooms')) );
+
 
 //---------------------------------------- U S E R-----------------------------------------------
 
@@ -50,22 +85,12 @@ app.post('/login', async (req, res) =>  {
         res.send(REPLY)
       }else{
         REPLY.isLoggedIn = true;
-
         REPLY.isAdmin = (Username === 'admin');
-        // console.log("\n\n--> isAdmin = "+isAdmin+"\n\n")
-
-        // localStorage.setItem('TOKEN', JSON.stringify(result));
-
         REPLY.User = Username;
         
         res.send(REPLY)
-        // res.redirect('/');
       } 
-      
-      // res.json(result);
-      // res.send(result)
   })
-  // res.send(`Username: ${username} Email: ${email} Password: ${password}`);
 });
 
 app.post('/signup', (req, res) =>  {
@@ -80,55 +105,16 @@ app.post('/signup', (req, res) =>  {
     Password: password
   }
 
-  // console.log('\n\nMESSAGE = ');
-  // console.log(message);
-
   DB.USERS_DB.singupUser(message)
     .then( (result) => {
       console.log("\n\nFROM SERVER ---- LOGIN")
       console.log(result);
-      res.json(result);
-      
-      // if(result == false) {
-      //   // res.send("TRY AGAIN LATER")
-      //   // res.redirect('/signup')
-
-      //   res.json({
-      //     isError: true,
-      //     isLoggedIn: false,
-      //     isAdmin: false
-      //   })
-      // }else{
-      //   isLoggedIn = true;
-
-      //   isAdmin = (username === 'admin');
-      //   // console.log("\n\n--> isAdmin = "+isAdmin+"\n\n")
-
-      //   LoggedInUsername = username;
-        
-      //   // res.send("LOGGED IN isAdmin = "+isAdmin)
-      //   // res.redirect('/')
-
-      //   res.json({
-      //     isError: false,
-      //     isLoggedIn: isLoggedIn,
-      //     isAdmin: isAdmin,
-      //     LoggedInUsername: LoggedInUsername
-      //   })
-      // }    
-  })
-
-  // res.send(`Username: ${username} PhoneNo: ${phoneno} Email: ${email} Password: ${password}`);
-});
-
-app.get("/login", (req,res) =>{
-  res.json({
-    isLoggedIn: isLoggedIn,
-    isAdmin: isAdmin,
-    Username: LoggedInUsername
+      res.send(result);
   })
 });
 
-//---------------------------------------- P O R T -----------------------------------------------
+app.get('/users/deletion', (req, res) => DB.USERS_DB.deleteUser( req.query.username ).then( () => res.redirect('/users')) );
+
+//---------------------------------------- ------------------------- ----------------------
 
 app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });

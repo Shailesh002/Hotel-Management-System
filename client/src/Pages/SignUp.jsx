@@ -1,6 +1,3 @@
-// import React, { useState, useEffect} from "react";
-
-import Greeting from "../Components/Greeting"
 import SignUpForm from "../Components/SignUpForm"
 
 function SignUp() {

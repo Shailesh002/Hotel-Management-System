@@ -11,8 +11,11 @@ import Home from "./Pages/Home";
 // import Contact from './Pages/Contact';
 import About from './Pages/About';
 import Login from './Pages/Login';
+import Book from './Pages/Book';
 import Rooms from './Pages/Rooms';
 import SignUp from './Pages/SignUp';
+import BookingForm from './Pages/BookingForm';
+import USERS from './Pages/USERS';
   
 function App(props) {
 
@@ -36,10 +39,13 @@ function App(props) {
                 {/* <Navbar /> */}
                 <Routes>
                     <Route exact path='/' element={<Home TOKEN={TOKEN} />} />
+                    <Route path='/book' element={<Book />} />
                     <Route path='/rooms' element={<Rooms />} />
+                    <Route path='/users' element={<USERS />} />
                     <Route path='/about' element={<About/>} />
                     <Route path='/login' element={<Login TOKEN={TOKEN} />} />
                     <Route path='/signup' element={<SignUp TOKEN={TOKEN} />} />
+                    <Route path='/bookingform' element={<BookingForm/>} />
                 </Routes>
             </Router>
         <Footer/>

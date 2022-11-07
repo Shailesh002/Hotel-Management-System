@@ -4,10 +4,24 @@ import React, {useState,useEffect} from 'react';
 import Logout from "./Logout";
 
 function Navbar(props){
+
+    const [ROOMSPAGE, setROOMSPAGE] = React.useState(null);
     const [TOKEN, setToken] = useState([]);
 
     function getToken() {
-        setToken(localStorage.getItem('TOKEN'));
+        setToken(JSON.parse(localStorage.getItem('TOKEN')));
+
+        console.log('GETTOKEN()');
+        console.log(TOKEN)
+
+        let ANS = ((TOKEN & TOKEN.isAdmin===true )? 
+        <NavSingle Title="Rooms" URL="/rooms" />
+        : null);
+
+        console.log(ANS);
+
+        setROOMSPAGE(ANS);
+
         console.log(TOKEN);
     }
 
@@ -19,8 +33,27 @@ function Navbar(props){
         <div className="">
             <nav>
                 <NavSingle URL="/" Title="Home"/>
-                <NavSingle URL="/rooms" Title="Rooms"/>
-                {/* <NavSingle URL="/contact" Title="Contact"/> */}
+                <NavSingle URL="/book" Title="Book"/>
+
+
+                {
+                    TOKEN===null? 
+                    null:
+                    TOKEN.isAdmin===true ?
+                    <NavSingle Title="Rooms" URL="/rooms" />
+                    : null
+                }
+
+                {
+                    TOKEN===null? 
+                    null:
+                    TOKEN.isAdmin===true ?
+                    <NavSingle Title="Users" URL="/users" />
+                    : null
+                }
+
+                {ROOMSPAGE}
+
                 <NavSingle URL="/about" Title="About"/>
                 
                 {
