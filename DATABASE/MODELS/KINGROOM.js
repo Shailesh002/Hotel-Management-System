@@ -16,3 +16,7 @@ module.exports.deleteKingRoomItem = async (delID) => {
 module.exports.addKingRoomItem = async (newDish) => {
     await (new KingRoom(newDish)).save();
 }
+
+module.exports.COUNT = async () => {
+   return await KingRoom.count();
+}

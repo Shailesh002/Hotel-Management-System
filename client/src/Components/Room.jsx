@@ -78,6 +78,12 @@ function Room(props) {
         return ANS;
     }
 
+    function handleBookClick() {
+        localStorage.setItem('BOOK_TITLE', props.TITLE);
+
+        
+    }
+ 
     return (
         <div className="SingleCardBox">
             <Container className=''>
@@ -93,7 +99,7 @@ function Room(props) {
                         </Row>
 
                         <Row>
-                            <p>{props.BODY}</p>
+                            <p>{props.BODY}</p> 
                         </Row>
 
                         <Row>
@@ -102,6 +108,10 @@ function Room(props) {
                                 callSwitch(item)
                             ) ) }
                             </h5>
+
+                            <h6>
+                            ₹ {props.PRICE} / night
+                            </h6>
                         </Row>
 
                         <Row>
@@ -109,7 +119,7 @@ function Room(props) {
                             TOKEN === null?
                             <a href='/login'><button className='BookBTN'>BOOK</button></a>
                             : 
-                            <a href='/bookingform'><button className='BookBTN'>BOOK</button></a>
+                            <a href='/bookingform' onClick={handleBookClick}><button className='BookBTN'>BOOK</button></a>
                         }
                             
                         </Row>

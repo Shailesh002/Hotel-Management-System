@@ -16,3 +16,12 @@ module.exports.deleteSingleRoomItem = async (delID) => {
 module.exports.addSingleRoomItem = async (newDish) => {
     await (new SingleRoom(newDish)).save();
 }
+
+module.exports.COUNT = async () => {
+    let ANS = await SingleRoom.count();
+    
+    // console.log('\nIN THE SINGLE ROOM COUNT FXN');
+    // console.log(ANS);
+
+    return ANS;
+}

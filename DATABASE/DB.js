@@ -9,3 +9,4 @@ module.exports.DOUBLEROOM = require('./MODELS/DOUBLEROOM');
 module.exports.TWINROOM = require('./MODELS/TWINROOM');
 module.exports.KINGROOM = require('./MODELS/KINGROOM');
 module.exports.COUNTER = require('./MODELS/COUNTER');
+module.exports.BOOKING = require('./MODELS/BOOKING');

@@ -16,3 +16,7 @@ module.exports.deleteDoubleRoomItem = async (delID) => {
 module.exports.addDoubleRoomItem = async (newDish) => {
     await (new DoubleRoom(newDish)).save();
 }
+
+module.exports.COUNT = async () => {
+    return await DoubleRoom.count();
+}

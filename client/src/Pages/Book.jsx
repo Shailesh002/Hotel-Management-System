@@ -1,84 +1,231 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { Form, Button } from "react-bootstrap";
+
+import Room from "../Components/Room";
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
-// import DatalistInput from 'react-datalist-input';
-// import 'react-datalist-input/dist/styles.css';
-
-
-import Room from "../Components/Room"
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
-function Book(){
+function Book() {
+    const [renderRooms, setRooms] = useState([]);
 
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate1, setStartDate1] = useState(new Date());
+    const [startDate2, setStartDate2] = useState(new Date());
+    const [maxDate, setMaxDate] = useState(new Date());
 
-    async function checkRoomsAvailableOnThisDate(DATE) {
+    async function handleClick(event) {
+        event.preventDefault();
+
+        // console.log('\nRECEIVED DATA ON CLICK');
+        // console.log(.getDate());
+
+        
+
+        let CD1 = new Date(event.target[0].value);
+        let CD2 = new Date(event.target[1].value);
+        
+        localStorage.setItem('BOOK_CHECKIN', CD1)
+        localStorage.setItem('BOOK_CHECKOUT', CD2)
+
         let ANS = null;
+        let R1 = null, R2 = null, R3 = null, R4 = null;
 
-        console.log('IN THE FXN, DATE = '+DATE);
+        let SEND_TO_SERVER = {
+            d1: CD1.getDate(),
+            m1: (CD1.getMonth()+1),
+            y1: CD1.getFullYear(),
+            d2: CD2.getDate(),
+            m2: (CD2.getMonth()+1),
+            y2: CD2.getFullYear(),
+        }
 
-        await fetch(`/counter/date?DATE=${encodeURIComponent(DATE)}`)
-        .then(response => {
-            console.log("RESPONSE RECEIVED");
-            console.log(response);
-            // response.json()
+        console.log('IN THE FXN, DATE = ');
+        console.log(SEND_TO_SERVER);
+
+        await fetch('http://localhost:3001/counterbwdates', {  
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify(SEND_TO_SERVER)
         })
-        // .then(data => {
-        //     console.log("RESPONSE")
-        //     console.log(data)
-        // })
-        // .catch(error => {
-        //     //handle error
-        //     console.log("ERROR");
-        //     console.log(error);
-        // });  
+        .then(response => response.json())
+        .then(data => {
+            console.log("TOKEN VALUE RECEIVED FROM SERVER")
+            console.log(data)
 
-        // SINGLE ROOM 
+            // SINGLE ROOM 
+            R1 = data.hasSingleRoom === true ?
+            <Room 
+                TITLE="Single Room"
+                IMG="/Images/singleroom.jpg"
+                VOL=""
+                CAPACITY=""
+                BODY="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                UTILITIES={[1,2,3]}
+                PRICE = {5000}
+            /> : null;
+            // DOUBLE ROOM
+            R2 = data.hasDoubleRoom === true ?
+            <Room 
+                TITLE="Double Room"
+                IMG="/Images/doubleroom.jpg"
+                VOL=""
+                CAPACITY=""
+                BODY="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                UTILITIES={[1,2,3,4]}
+                PRICE = {10000}
+            /> : null;
+            // TWIN ROOM
+            R3 = data.hasTwinRoom === true ?
+            <Room 
+                TITLE="Twin Room"
+                IMG="/Images/twinroom.jpg"
+                VOL=""
+                CAPACITY=""
+                BODY="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                UTILITIES={[1,2,3,4,5]}
+                PRICE = {15000}
+            /> : null;
+            // KING ROOM
+            R4 = data.hasKingRoom === true ?
+            <Room 
+                TITLE="King Room"
+                IMG="/Images/kingroom.jpg"
+                VOL=""
+                CAPACITY=""
+                BODY="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                UTILITIES={[1,2,3,4,5,6,7]}
+                PRICE = {20000}
+            /> : null;
+        });
 
-        // DOUBLE ROOM
+        ANS = <div className="RoomsContainer">
+            {R1}
+            {R2}
+            {R3}
+            {R4}
+        </div>
 
-        // TWIN ROOM
-
-        // KING ROOM
-
-        return ANS;
+        setRooms(ANS);
     }
 
-    return(
+    useEffect( () => {
+        let d = startDate1.getDate();
+        let m = startDate1.getMonth()+1;
+        let y = startDate1.getFullYear();
+
+        // ADDING 3 DAYS 
+        if(d === 31 
+            && (
+                m === 1 || m === 3 || m === 5 || m === 7 || m === 8 || m === 10 || m === 12 
+            )  
+        ) {
+            d = 5;
+            y = m === 12 ? y+1 : y;
+            m = m === 12? 1 : m + 1;
+        }else if(
+            d === 30
+            && (
+                m === 4 || m === 6 || m === 9 || m === 11  
+            )  
+        ){
+            d = 5;
+            m = m + 1;
+        }else if(
+            d === 29 
+            && (
+                m === 2
+            )
+        ){
+            d = 5;
+            m = 3;
+        }else if(
+            d === 28 && m === 2
+        ) {
+            d = 5;
+            m = 3;
+        }else{
+            d = d+5;
+        }
+
+        if(d < 10) {
+            d = '0' + d;
+        }
+
+        if(m < 10) {
+            m = '0' + m;
+        }
+
+        let DATE = y + '-' + m + '-' + d;
+
+        console.log('\n+3 DATE = ');
+        console.log(DATE);
+
+        setMaxDate(new Date(DATE));
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return (
         <div className=''>
             <h1 className="Center">Available Suits</h1>
 
             <div className="RoomsInputContainer">
-                <Container className="" >
-                    <Row className="SingleCardBox RoomsInputBox">
-                        <Col>
-                            <label>Check-in</label>
-                            <DatePicker  
-                                selected={startDate}
-                                onChange={(date) => setStartDate(date)}
-                                value={startDate}
-                                required
-                                onSelect={(date) => {
-                                    // let CHECKINDATE = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()
-                                    // console.log('ON SELECTION = '+CHECKINDATE);
-                                    // console.log('ON SELECTION = '+date);
+                <Form
+                    onSubmit={handleClick}
+                >
+                    <Container className="" >
+                        <Row className="Center SingleCardBox RoomsInputBox">
+                            <Col>
+                                <Form.Group className="mb-3" controlId="formBasicName">
+                                    <Form.Label className="label">Check-in</Form.Label>
+                                    <DatePicker
+                                        selected={startDate1}
+                                        onChange={(date) => setStartDate1(date)}
+                                        value={startDate1}
+                                        required
+                                        // onSelect={(date) => {
+                                        //     checkRoomsAvailableOnThisDate(date);
+                                        // }}
 
-                                    checkRoomsAvailableOnThisDate(date);
-                                }}
-                                dateFormat={'y-MM-dd'}
-                                name="DATE"
-                            />
-                        </Col>
-                        <Col>
-                            <label>Check-out</label>
-                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                        </Col>
-                        <Col>
-                            <label>Occupancy</label>
+                                        dateFormat={'y-MM-dd'}
+                                        name="DATE1"
+                                        // isClearable
+                                        closeOnScroll={true}
+
+                                        minDate={new Date()}
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group className="mb-3" controlId="formBasicName">
+                                    <Form.Label className="label">Check-out</Form.Label>
+                                    <DatePicker
+                                        selected={startDate2}
+                                        value={startDate2}
+                                        onChange={(date) => setStartDate2(date)}
+                                        // maxDate={'2022-03-31'}
+                                        dateFormat={'y-MM-dd'}
+                                        name="DATE2"
+                                        // isClearable
+                                        closeOnScroll={true}
+                                    // onSelect={(date) => {
+                                    //     checkRoomsAvailableOnThisDate(date);
+                                    // }}
+                                        maxDate={maxDate}
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col xs={2}>
+                                {/* <label>Occupancy</label>
                             {/* <DatalistInput
                                 placeholder="1 room  2 adults"
                                 // label="Select ice cream flavor"
@@ -90,45 +237,18 @@ function Book(){
                                     { id: 'KingRoom', value: '1 room  2 adults' },
                                 ]}
                             /> */}
-                        </Col>
-                    </Row>
-                </Container>
+
+                                <Button
+                                    className="SearchBtn"
+                                    type="submit"
+                                >Search</Button>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Form>
             </div>
 
-            <div className="RoomsContainer">
-                <Room 
-                    TITLE="Single Room"
-                    IMG="/Images/singleroom.jpg"
-                    VOL=""
-                    CAPACITY=""
-                    BODY="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-                    UTILITIES={[1,2,3]}
-                />
-                <Room 
-                    TITLE="Double Room"
-                    IMG="/Images/doubleroom.jpg"
-                    VOL=""
-                    CAPACITY=""
-                    BODY="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-                    UTILITIES={[1,2,3,4]}
-                />
-                <Room 
-                    TITLE="Twin Room"
-                    IMG="/Images/twinroom.jpg"
-                    VOL=""
-                    CAPACITY=""
-                    BODY="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-                    UTILITIES={[1,2,3,4,5]}
-                />
-                <Room 
-                    TITLE="King Room"
-                    IMG="/Images/kingroom.jpg"
-                    VOL=""
-                    CAPACITY=""
-                    BODY="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-                    UTILITIES={[1,2,3,4,5,6,7]}
-                />
-            </div>
+            {renderRooms}
         </div>
     );
 }

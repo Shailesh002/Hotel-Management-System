@@ -16,3 +16,7 @@ module.exports.deleteTwinRoomItem = async (delID) => {
 module.exports.addTwinRoomItem = async (newDish) => {
     await (new TwinRoom(newDish)).save();
 }
+
+module.exports.COUNT = async () => {
+    return await TwinRoom.count();
+}

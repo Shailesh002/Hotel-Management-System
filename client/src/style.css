@@ -2,8 +2,12 @@ body{
     padding: 0;
     margin: 0;
     box-sizing: border-box; 
-    background-color: rgb(67, 150, 156) !important;
+    /* background-color: rgb(67, 150, 156) !important; */
+
+    background-color: rgb(198, 224, 224) !important;
+
     color: white !important;
+    /* color: black; */
 
     /* font-family: 'Mukta Mahee', sans-serif; */
     font-family: 'Poppins', sans-serif;
@@ -66,6 +70,20 @@ button{
     color: #093c5e;
     text-decoration: underline;
     
+}
+
+.SearchBtn{
+    background-color: transparent;
+    border: none;
+    color: rgb(89,148,159);
+    font-size: 1.5rem;
+}
+
+.SearchBtn:hover{
+    background-color: transparent;
+    border: none;
+    color: rgb(0, 0, 0) !important;
+    text-decoration: underline;
 }
 
 /* ---------------------------- INPUT BOXES ---------------------------- */
@@ -169,6 +187,9 @@ header{
 
     border-bottom: 3px solid white;
     box-shadow: 0px 1px 0px #242424;
+
+    /* position: fixed;
+    z-index: 1; */
 }
 
 header h4{

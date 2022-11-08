@@ -21,7 +21,37 @@ app.use(bodyParser.json());
 
 app.get("/counter", (req, res) => DB.COUNTER.getCounterList().then( (result) => res.json(result)) );
 
-app.get("/counter/date", (req, res) => DB.COUNTER.getCounterForTheGivenDate(req.query.DATE).then( (result) => res.json(result)) );
+// app.get("/counter/date", (req, res) => DB.COUNTER.getCounterForTheGivenDate(req.query.DATE).then( (result) => res.json(result)) );
+
+app.post("/counterondate", (req, res) => DB.COUNTER.getCounterForTheGivenDate( { d: req.body.d, m: req.body.m, y: req.body.y} ).then( (ANS) => res.json(ANS)) );
+
+app.post("/counterbwdates", (req, res) => DB.COUNTER.getCounterBwDates( { d1: req.body.d1, m1: req.body.m1, y1: req.body.y1, d2: req.body.d2, m2: req.body.m2, y2: req.body.y2 } ).then( (ANS) => res.json(ANS)) );
+
+//-------------------------------- BOOKING -----------------------------------------------
+
+app.get("/booking", (req, res) => DB.BOOKING.getBookingList().then( (result) => res.json(result)) );
+
+app.post("/book", (req, res) => DB.BOOKING.addBooking( {
+  Name: req.body.Name,
+  PhoneNo: req.body.PhoneNo,
+  Email: req.body.Email,
+  DOB: req.body.DOB,
+  Address: req.body.Address,
+  ZipCode: req.body.ZipCode,
+  Nationality: req.body.Nationality,
+  CreditType: req.body.CreditType,
+  CreditHolder: req.body.CreditHolder,
+  CreditNumber: req.body.CreditNumber,
+  CreditExpiration: req.body.CreditExpiration,
+  RoomCategory: req.body.RoomCategory,
+  CheckIn: req.body.CheckIn,
+  CheckOut: req.body.CheckOut
+} ).then( () => {
+  let x = new Date(req.body.CheckIn);
+  DB.COUNTER.INCR({d: x.getDate(), m: x.getMonth()+1, y: x.getFullYear(), RoomCategory: req.body.RoomCategory})
+  res.redirect('/pay');
+}));
+
 
 //-------------------------------- SINGLE ROOM -----------------------------------------------
 
