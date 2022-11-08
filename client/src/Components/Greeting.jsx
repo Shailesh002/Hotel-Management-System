@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 function Greeting(){
     return(
         <div className="Greeting Relative">
+        <img alt='circle' className='CircleImg' src='Images/circle2.png'/>
             <Container className='WhiteBox'>
                 <Row className='Row Center'>
                     <Col><h1>WALLACE<br/> RESIDENCIA</h1></Col>
@@ -17,8 +18,7 @@ function Greeting(){
                         <img src="Images/bache.png" alt="fun"/>
                     </Col>
                 </Row>
-            </Container>
-            <img alt='circle' className='CircleImg' src='Images/circle2.png'/>
+            </Container> 
         </div>
     );
 }

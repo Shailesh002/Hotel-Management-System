@@ -11,8 +11,66 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
+
+function nextDate(DATE) {
+    if(DATE.d === 31 
+        && (
+            DATE.m === 1 || DATE.m === 3 || DATE.m === 5 || DATE.m === 7 || DATE.m === 8 || DATE.m === 10 || DATE.m === 12 
+        )  
+    ) {
+        DATE.d = 1;
+        DATE.y = DATE.m === 12 ? DATE.y+1 : DATE.y;
+        DATE.m = DATE.m === 12? 1 : DATE.m + 1;
+    }else if(
+        DATE.d === 30
+        && (
+            DATE.m === 4 || DATE.m === 6 || DATE.m === 9 || DATE.m === 11  
+        )  
+    ){
+        DATE.d = 1;
+        DATE.m = DATE.m + 1;
+    }else if(
+        DATE.d === 29 
+        && (
+            DATE.m === 2
+        )
+    ){
+        DATE.d = 1;
+        DATE.m = 3;
+    }else if(
+        DATE.d === 28 && DATE.m === 2
+    ) {
+        DATE.d = 1;
+        DATE.m = 3;
+    }else{
+        DATE.d = DATE.d+1;
+    }
+
+    // if(DATE.d < 10) {
+    //     DATE.d = '0' + DATE.d;
+    // }
+
+    // if(DATE.m < 10) {
+    //     DATE.m = '0' + DATE.m;
+    // }
+
+    let NEXT = DATE.y + '-' + DATE.m + '-' + DATE.d;  
+    // let NEXT = {
+    //     d: DATE.d,
+    //     m: DATE.m,
+    //     y: DATE.y
+    // }  
+
+    // console.log('\nNEXT DATE = ');
+    // console.log(NEXT);
+
+    return new Date(NEXT);
+}
+
 function Book() {
     const [renderRooms, setRooms] = useState([]);
+
+    const [tmrwDate, setTmrwDate] = useState(new Date());
 
     const [startDate1, setStartDate1] = useState(new Date());
     const [startDate2, setStartDate2] = useState(new Date());
@@ -118,6 +176,20 @@ function Book() {
     }
 
     useEffect( () => {
+
+        let todayDate = new Date();
+        let todayDate2 = {
+            d: todayDate.getDate(),
+            m: todayDate.getMonth()+1,
+            y: todayDate.getFullYear()
+        }
+
+        let newDate = nextDate(todayDate2);
+        let newDate2 = new Date(newDate.y+'-'+newDate.m+'-'+newDate.d);
+        setTmrwDate(newDate2);
+
+        setTmrwDate()
+
         let d = startDate1.getDate();
         let m = startDate1.getMonth()+1;
         let y = startDate1.getFullYear();
@@ -201,7 +273,8 @@ function Book() {
                                         // isClearable
                                         closeOnScroll={true}
 
-                                        minDate={new Date()}
+                                        minDate={tmrwDate}
+                                        maxDate={maxDate}
                                     />
                                 </Form.Group>
                             </Col>
@@ -220,6 +293,7 @@ function Book() {
                                     // onSelect={(date) => {
                                     //     checkRoomsAvailableOnThisDate(date);
                                     // }}
+                                    minDate={tmrwDate}
                                         maxDate={maxDate}
                                     />
                                 </Form.Group>

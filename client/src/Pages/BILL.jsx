@@ -4,22 +4,9 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 function BILL(){
 
     const [bill, setbill] = useState([]);
-    const [PRICE, setPRICE] = useState(0);
-    // let PRICE = 0;
     
     useEffect( () => {
         setbill(JSON.parse(localStorage.getItem('BILL')));
-
-        if(bill.RoomCategory === 'Single Room') {
-            setPRICE(5000);
-        }else if(bill.RoomCategory === 'Double Room') {
-            setPRICE(10000);
-        }else if(bill.RoomCategory === 'Twin Room') {
-            setPRICE(15000);
-        }else if(bill.RoomCategory === 'King Room') {
-            setPRICE(20000);
-        }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -33,7 +20,17 @@ function BILL(){
                 padding: '3% 7%'
             }} >
             <Row className="Center">
-                    <h3><small>PRICE = </small>₹ {PRICE}</h3>
+                <h3><small>PRICE = </small>₹ {
+                    bill.RoomCategory === 'Single Room' ?
+                        5000 :
+                    bill.RoomCategory === 'Double Room' ?
+                        10000:
+                    bill.RoomCategory === 'Twin Room' ?
+                        15000:
+                    bill.RoomCategory === 'King Room' ?
+                        20000:
+                        12000
+                } </h3>
                 </Row>
                 <Row>
                     <Col>

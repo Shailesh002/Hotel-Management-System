@@ -2,6 +2,7 @@ function Logout(props){
 
     function handleLogout(event) {
         localStorage.removeItem('TOKEN',);
+        localStorage.clear();
     }
 
     return(
