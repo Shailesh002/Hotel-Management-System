@@ -147,4 +147,11 @@ app.get('/users/deletion', (req, res) => DB.USERS_DB.deleteUser( req.query.usern
 
 //---------------------------------------- ------------------------- ----------------------
 
-app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
+// app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
+
+// Establishing the port
+const PORT = process.env.PORT ||5000;
+ 
+// Executing the server on given port number
+app.listen(PORT, console.log(
+  `Server started on port ${PORT}`));
