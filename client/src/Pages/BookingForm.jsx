@@ -74,6 +74,8 @@ function BookingForm(props) {
                     <Form.Group className="mb-3" controlId="formBasicPhoneNo">
                         <Form.Label className="">Phone Number</Form.Label>
                         <PhoneInput
+                            minLength="9" maxLength="10"
+                            defaultCountry="IN"
                             value={valuePhone}
                             onChange={setValuePhone}
                             name="PhoneNo" required 
@@ -108,7 +110,11 @@ function BookingForm(props) {
 
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label className="">Zip Code</Form.Label>
-                        <Form.Control className="" type="number" name="ZipCode" required />
+                        <Form.Control 
+                            minLength="6" maxLength="6"
+                            className="" type="number" 
+                            name="ZipCode" required 
+                        />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicName">

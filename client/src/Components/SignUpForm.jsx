@@ -85,7 +85,7 @@ function SignUpForm (props) {
   }
 
   return (
-    <div className="FormContainer" style={{height:'480px'}}>
+    <div className="FormContainer" style={{height:'540px'}}>
       <Form 
       // action="/signup" method="post"
         onSubmit={handleSignUp} 
@@ -103,6 +103,7 @@ function SignUpForm (props) {
           <Form.Group className="mb-3" controlId="formBasicPhoneNo">
             <Form.Label className="">Phone Number</Form.Label>
             <PhoneInput
+                defaultCountry="IN"
                 value={valuePhone}
                 onChange={setValuePhone}
                 name="PhoneNo" required 
