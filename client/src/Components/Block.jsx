@@ -12,10 +12,6 @@ function Block(props){
         window.location.reload(false);      //to refresh the page
     }
 
-    // function handleClick2(id, heading) {
-    //     console.log("CLICKED PLUS")
-    // }
-
     function mouseEnter(){
         setTextFont("neonPurpleText");
     }

@@ -21,8 +21,6 @@ app.use(bodyParser.json());
 
 app.get("/counter", (req, res) => DB.COUNTER.getCounterList().then( (result) => res.json(result)) );
 
-// app.get("/counter/date", (req, res) => DB.COUNTER.getCounterForTheGivenDate(req.query.DATE).then( (result) => res.json(result)) );
-
 app.post("/counterondate", (req, res) => DB.COUNTER.getCounterForTheGivenDate( { d: req.body.d, m: req.body.m, y: req.body.y} ).then( (ANS) => res.json(ANS)) );
 
 app.post("/counterbwdates", (req, res) => DB.COUNTER.getCounterBwDates( { d1: req.body.d1, m1: req.body.m1, y1: req.body.y1, d2: req.body.d2, m2: req.body.m2, y2: req.body.y2 } ).then( (ANS) => res.json(ANS)) );

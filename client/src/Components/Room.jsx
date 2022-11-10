@@ -1,5 +1,5 @@
 import { FaBeer } from 'react-icons/fa';
-// import {GiCoffeePot} from 'react-icons/GiCoffeePot'
+
 import { TbBath } from "react-icons/tb";
 import { AiOutlineDesktop, AiOutlineWifi, AiFillBell, AiFillCar, AiOutlineCoffee} from "react-icons/ai";
 
@@ -79,9 +79,7 @@ function Room(props) {
     }
 
     function handleBookClick() {
-        localStorage.setItem('BOOK_TITLE', props.TITLE);
-
-        
+        localStorage.setItem('BOOK_TITLE', props.TITLE);    
     }
  
     return (

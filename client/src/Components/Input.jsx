@@ -10,7 +10,6 @@ function Input(props){
 
     return( 
         <div>
-            {/* <label>{props.labeling}</label><br/> */}
             <input 
                 className="TextCenter"
                 placeholder={props.labeling}

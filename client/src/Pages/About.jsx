@@ -5,22 +5,12 @@ import Col from 'react-bootstrap/Col';
 function About(){
 
     return(
-        <div 
-        // style={{
-        //         backgroundColor:'white', 
-        //         backgroundImage:'url(https://data.whicdn.com/images/325724465/original.gif)', 
-        //         backgroundRepeat: 'no-repeat',
-        //         backgroundSize: 'cover'
-        //     }}
-        >
+        <div>
             <h1 className='TextCenter'>ABOUT</h1>
 
             <div 
             style={{
                 backgroundColor:'white', 
-                // backgroundImage:'url(https://data.whicdn.com/images/325724465/original.gif)', 
-                // backgroundRepeat: 'no-repeat',
-                // backgroundSize: 'cover',
                 color:'black', 
                 padding:'3%'
             }}>

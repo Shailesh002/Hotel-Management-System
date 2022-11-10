@@ -340,10 +340,6 @@ footer{
     cursor: pointer;
 }
 
-/* .SingleCard{
-    
-} */
-
 .RoomText{
     color: black;
 }
@@ -428,22 +424,6 @@ footer{
     width: 90%;
     margin: 3% 7%;
 }
-
-/* .Block h4{
-    position: absolute;
-    top: 15% !important;
-    left: 5%;
-    size: 5rem !important;
-    z-index: 1;
-}
-
-.Block h6{
-    position: absolute;
-    top: 25%;
-    left: 5%;
-    size: 20px;
-    z-index: 1;
-} */
 
 .Block:hover{
     cursor: pointer;

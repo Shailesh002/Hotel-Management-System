@@ -4,7 +4,6 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-// import { Navigate } from "react-router-dom";
 import { useNavigate} from 'react-router-dom';
 
 function BookingForm(props) {
@@ -150,9 +149,6 @@ function BookingForm(props) {
                             dateFormat={'y-MM-dd'}
                             name="CreditExpiration"
                             closeOnScroll={true}
-                            
-
-                            // maxDate={new Date('2004-01-01')}
                         />
                     </Form.Group>
 
