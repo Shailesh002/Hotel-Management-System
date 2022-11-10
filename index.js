@@ -149,6 +149,11 @@ app.get('/users/deletion', (req, res) => DB.USERS_DB.deleteUser( req.query.usern
 
 // app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
 
+const uri = process.env.MONGODB_URI;
+
+// This route serves the React app
+app.get('/', (req, res) => res.sendFile(path.resolve(path.join(__dirname,"client"), "build", "index.html")));
+
 // Establishing the port
 const PORT = process.env.PORT ||5000;
  
