@@ -150,16 +150,16 @@ app.post('/signup', (req, res) =>  {
 
 //---------------------------------------- ------------------------- ----------------------
 
-app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
+// app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
 
-// const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 
-// // This route serves the React app
-// app.get('/', (req, res) => res.sendFile(path.resolve(path.join(__dirname,"client"), "build", "index.html")));
+// This route serves the React app
+app.get('/', (req, res) => res.sendFile(path.resolve(path.join(__dirname,"client"), "build", "index.html")));
 
-// // Establishing the port
-// const PORT = process.env.PORT || 3001;
+// Establishing the port
+const PORT = process.env.PORT || 3001;
  
-// // Executing the server on given port number
-// app.listen(PORT, console.log(
-//   `Server started on port ${PORT}`));
+// Executing the server on given port number
+app.listen(PORT, console.log(
+  `Server started on port ${PORT}`));
