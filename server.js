@@ -155,7 +155,7 @@ app.post('/signup', (req, res) =>  {
 const uri = process.env.MONGODB_URI;
 
 // This route serves the React app
-app.get('/', (req, res) => res.sendFile(path.resolve(path.join(__dirname,"client"), "build", "index.html")));
+app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "client", "build", "index.html")));
 
 // Establishing the port
 const PORT = process.env.PORT || 3001;
