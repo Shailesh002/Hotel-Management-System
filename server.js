@@ -121,6 +121,8 @@ app.post('/login', async (req, res) =>  {
   })
 });
 
+app.get('/users/deletion', (req, res) => DB.USERS_DB.deleteUser( req.query.username ).then( () => res.redirect('/users')) );
+
 app.post('/signup', (req, res) =>  {
   let username = req.body.Username;
   let email = req.body.Email;
@@ -141,20 +143,18 @@ app.post('/signup', (req, res) =>  {
   })
 });
 
-app.get('/users/deletion', (req, res) => DB.USERS_DB.deleteUser( req.query.username ).then( () => res.redirect('/users')) );
-
 //---------------------------------------- ------------------------- ----------------------
 
-// app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
+app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
 
-const uri = process.env.MONGODB_URI;
+// const uri = process.env.MONGODB_URI;
 
-// This route serves the React app
-app.get('/', (req, res) => res.sendFile(path.resolve(path.join(__dirname,"client"), "build", "index.html")));
+// // This route serves the React app
+// app.get('/', (req, res) => res.sendFile(path.resolve(path.join(__dirname,"client"), "build", "index.html")));
 
-// Establishing the port
-const PORT = process.env.PORT ||5000;
+// // Establishing the port
+// const PORT = process.env.PORT || 3001;
  
-// Executing the server on given port number
-app.listen(PORT, console.log(
-  `Server started on port ${PORT}`));
+// // Executing the server on given port number
+// app.listen(PORT, console.log(
+//   `Server started on port ${PORT}`));
