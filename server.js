@@ -119,6 +119,11 @@ app.post('/login', async (req, res) =>  {
         res.send(REPLY)
       } 
   })
+  .catch(error => {
+    //handle error
+    console.log("ERROR");
+    console.log(error);
+  });
 });
 
 app.get('/users/deletion', (req, res) => DB.USERS_DB.deleteUser( req.query.username ).then( () => res.redirect('/users')) );

@@ -5,7 +5,7 @@ mongoose.connect("mongodb://localhost:27017/HMS", { useNewUrlParser: true});
 const COUNTER = mongoose.model("counters", new mongoose.Schema({ Date: {d:Number,m:Number,y:Number}, CounterSingleRoom: Number, CounterDoubleRoom: Number, CounterTwinRoom: Number, CounterKingRoom: Number}));
 
 const addCounter = async (newUser) => {
-    await (new COUNTER(newUser)).save();
+    await (new COUNTER(newUser)).save().catch(function(err){ console.log(err)});
 }
 
 // const createUser = async (entryUser) => {

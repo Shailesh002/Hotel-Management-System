@@ -25,5 +25,5 @@ module.exports.getBookingList = async () => {
 }
 
 module.exports.addBooking = async (newDish) => {
-    await (new BOOKING(newDish)).save();
+    await (new BOOKING(newDish)).save().catch(function(err){ console.log(err)});
 }
