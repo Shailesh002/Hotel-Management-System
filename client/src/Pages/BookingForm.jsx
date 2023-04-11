@@ -4,7 +4,6 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-// import { Navigate } from "react-router-dom";
 import { useNavigate} from 'react-router-dom';
 
 function BookingForm(props) {
@@ -74,6 +73,8 @@ function BookingForm(props) {
                     <Form.Group className="mb-3" controlId="formBasicPhoneNo">
                         <Form.Label className="">Phone Number</Form.Label>
                         <PhoneInput
+                            minLength="9" maxLength="10"
+                            defaultCountry="IN"
                             value={valuePhone}
                             onChange={setValuePhone}
                             name="PhoneNo" required 
@@ -108,7 +109,11 @@ function BookingForm(props) {
 
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label className="">Zip Code</Form.Label>
-                        <Form.Control className="" type="number" name="ZipCode" required />
+                        <Form.Control 
+                            minLength="6" maxLength="6"
+                            className="" type="number" 
+                            name="ZipCode" required 
+                        />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicName">
@@ -144,9 +149,6 @@ function BookingForm(props) {
                             dateFormat={'y-MM-dd'}
                             name="CreditExpiration"
                             closeOnScroll={true}
-                            
-
-                            // maxDate={new Date('2004-01-01')}
                         />
                     </Form.Group>
 

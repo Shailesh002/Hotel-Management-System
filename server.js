@@ -21,8 +21,6 @@ app.use(bodyParser.json());
 
 app.get("/counter", (req, res) => DB.COUNTER.getCounterList().then( (result) => res.json(result)) );
 
-// app.get("/counter/date", (req, res) => DB.COUNTER.getCounterForTheGivenDate(req.query.DATE).then( (result) => res.json(result)) );
-
 app.post("/counterondate", (req, res) => DB.COUNTER.getCounterForTheGivenDate( { d: req.body.d, m: req.body.m, y: req.body.y} ).then( (ANS) => res.json(ANS)) );
 
 app.post("/counterbwdates", (req, res) => DB.COUNTER.getCounterBwDates( { d1: req.body.d1, m1: req.body.m1, y1: req.body.y1, d2: req.body.d2, m2: req.body.m2, y2: req.body.y2 } ).then( (ANS) => res.json(ANS)) );
@@ -121,7 +119,14 @@ app.post('/login', async (req, res) =>  {
         res.send(REPLY)
       } 
   })
+  .catch(error => {
+    //handle error
+    console.log("ERROR");
+    console.log(error);
+  });
 });
+
+app.get('/users/deletion', (req, res) => DB.USERS_DB.deleteUser( req.query.username ).then( () => res.redirect('/users')) );
 
 app.post('/signup', (req, res) =>  {
   let username = req.body.Username;
@@ -143,8 +148,18 @@ app.post('/signup', (req, res) =>  {
   })
 });
 
-app.get('/users/deletion', (req, res) => DB.USERS_DB.deleteUser( req.query.username ).then( () => res.redirect('/users')) );
-
 //---------------------------------------- ------------------------- ----------------------
 
-app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
+// app.listen(3001, err => { err ? console.log("ERROR : " + err) : null });
+
+const uri = process.env.MONGODB_URI;
+
+// This route serves the React app
+app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "client", "build", "index.html")));
+
+// Establishing the port
+const PORT = process.env.PORT || 3001;
+ 
+// Executing the server on given port number
+app.listen(PORT, console.log(
+  `Server started on port ${PORT}`));

@@ -11,7 +11,7 @@ function Navbar(props){
     function getToken() {
         setToken(JSON.parse(localStorage.getItem('TOKEN')));
 
-        console.log('GETTOKEN()');
+        console.log('NAVBAR RECEIVES TOKEN');
         console.log(TOKEN)
 
         let ANS = ((TOKEN & TOKEN.isAdmin===true )? 
@@ -21,8 +21,6 @@ function Navbar(props){
         console.log(ANS);
 
         setROOMSPAGE(ANS);
-
-        console.log(TOKEN);
     }
 
     useEffect( () => getToken()

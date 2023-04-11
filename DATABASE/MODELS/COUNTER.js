@@ -16,11 +16,11 @@ module.exports.getCounterList = async () => {
 }
 
 module.exports.addCounter = async (newUser) => {
-    await (new COUNTER(newUser)).save();
+    await (new COUNTER(newUser)).save().catch(function(err){ console.log(err)});
 }
 
 module.exports.getCounterForTheGivenDate =  async(DATA) => {  
-    return await COUNTER.findOne({Date: {d: DATA.d, m: DATA.m, y: DATA.y} } )
+    return await COUNTER.findOne({Date: {d: DATA.d, m: DATA.m, y: DATA.y} } ).catch(function(err){ console.log(err)});
 }
 
 function nextDate(DATE) {
@@ -123,7 +123,7 @@ module.exports.getCounterBwDates =  async(DATA) => {
     for(let i = D1, INDEX = 1; INDEX <= 3; i = nextDate(i), INDEX++) {
         console.log("\n---> PASS " + INDEX);
 
-        let GET = await this.getCounterForTheGivenDate({d: i.d, m: i.m, y: i.y});
+        let GET = await this.getCounterForTheGivenDate({d: i.d, m: i.m, y: i.y}).catch(function(err){ console.log(err)});
 
         console.log("\nDATE = ");
         console.log(i);
@@ -182,22 +182,22 @@ module.exports.INCR = async(DATA) => {
         return await COUNTER.updateOne(
             {Date: {d: DATA.d, m: DATA.m, y: DATA.y}}, 
             {$inc: { CounterSingleRoom : 1 }}
-        );
+        ).catch(function(err){ console.log(err)});
     }else if(DATA.RoomCategory === 'Twin Room') {
         return await COUNTER.updateOne(
             {Date: {d: DATA.d, m: DATA.m, y: DATA.y}}, 
             {$inc: { CounterTwinRoom : 1 }}
-        );
+        ).catch(function(err){ console.log(err)});
     }else if(DATA.RoomCategory === 'Double Room') {
         return await COUNTER.updateOne(
             {Date: {d: DATA.d, m: DATA.m, y: DATA.y}}, 
             {$inc: { CounterDoubleRoom : 1 }}
-        );
+        ).catch(function(err){ console.log(err)});
     }
     
     return await COUNTER.updateOne(
         {Date: {d: DATA.d, m: DATA.m, y: DATA.y}}, 
         {$inc: { CounterKingRoom : 1 }}
-    );
+    ).catch(function(err){ console.log(err)});
 }
  

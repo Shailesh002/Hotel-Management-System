@@ -16,7 +16,7 @@ function Book2() {
     async function checkRoomsAvailableOnThisDate(DATE) {
 
         let ANS = null;
-        
+
         let CHECKINDATE = {
             d: DATE.getDate(),
             m: (DATE.getMonth() + 1),
@@ -60,44 +60,35 @@ function Book2() {
 
     return (
         <div className="Center"
-        style={{
-            margin: '3% 7%'
-        }}
+            style={{
+                margin: '3% 7%'
+            }}
         >
             <Container>
-            <Row>
-                <Col>
-                    <h1>ROOM COUNTER</h1>
-                </Col>
-                <Col>
-                    <label>Date</label>
-                    <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        value={startDate}
-                        required
-                        onSelect={(date) => {
-                            // let CHECKINDATE = {
-                            //     d: date.getDate(),
-                            //     m: (date.getMonth()+1),
-                            //     y: date.getFullYear()
-                            // }
-                            // console.log('ON SELECTION = ');
-                            // console.log(CHECKINDATE);
-                            // console.log('ON SELECTION = '+date);
+                <Row>
+                    <Col>
+                        <h1>ROOM COUNTER</h1>
+                    </Col>
+                    <Col>
+                        <label>Date</label>
+                        <DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                            value={startDate}
+                            required
+                            onSelect={(date) => {
+                                checkRoomsAvailableOnThisDate(date);
+                            }}
 
-                            checkRoomsAvailableOnThisDate(date);
-                        }}
+                            dateFormat={'y-MM-dd'}
+                            name="DATE1"
+                            isClearable
+                            closeOnScroll={true}
+                        />
 
-                        dateFormat={'y-MM-dd'}
-                        name="DATE1"
-                        isClearable
-                        closeOnScroll={true}
-                    />  
-
-                    {renderCounter}
-                </Col>
-            </Row>
+                        {renderCounter}
+                    </Col>
+                </Row>
             </Container>
         </div>
     )

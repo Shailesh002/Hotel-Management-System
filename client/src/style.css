@@ -18,11 +18,25 @@ body{
 
 /* --------------------- ICON --------------------- */
 
+icon:hover{
+    color: black;
+}
+
 .ICON {
     display: inline-block;
     color: rgb(2, 2, 76);
     padding: 3px;
     margin: 3px;
+}
+
+.SocialIcon{
+    margin: 3px 7px;
+}
+
+.SocialIcon:hover{
+    color: #093c5e;
+    border-radius: 50%;
+    border: 1.5px solid black;
 }
 
 /* --------------------- BUTTONS --------------------- */
@@ -202,11 +216,14 @@ header h4{
 /* --------------------- FOOTER --------------------- */
 
 footer{
-    /* position: absolute;
-    bottom: 0; */
+    /* position: absolute; */
+    bottom: 0;
+    background-color: rgb(67, 150, 156);
     text-align: center;
     width: 100%;
-    padding: 3px 2px 0;
+    height: 120px;
+    padding: 1.2% 7%;
+    
     font-size: 1rem;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -323,10 +340,6 @@ footer{
     cursor: pointer;
 }
 
-/* .SingleCard{
-    
-} */
-
 .RoomText{
     color: black;
 }
@@ -411,22 +424,6 @@ footer{
     width: 90%;
     margin: 3% 7%;
 }
-
-/* .Block h4{
-    position: absolute;
-    top: 15% !important;
-    left: 5%;
-    size: 5rem !important;
-    z-index: 1;
-}
-
-.Block h6{
-    position: absolute;
-    top: 25%;
-    left: 5%;
-    size: 20px;
-    z-index: 1;
-} */
 
 .Block:hover{
     cursor: pointer;
